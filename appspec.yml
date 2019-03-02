@@ -5,10 +5,10 @@ files:
     destination: /tmp
 hooks:
   ApplicationStart:
-    - location: scripts/start.sh
+    - location: deploy/start.sh
       timeout: 120
       runas: root
   ApplicationStop:
-    - location: scripts/remove.sh
+    - location: deploy/remove.sh
       timeout: 120
       runas: root
