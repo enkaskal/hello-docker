@@ -1,0 +1,14 @@
+version: 0.0
+os: linux
+files:
+  - source: ./
+    destination: /tmp
+hooks:
+  ApplicationStart:
+    - location: scripts/start.sh
+      timeout: 120
+      runas: root
+  ApplicationStop:
+    - location: scripts/remove.sh
+      timeout: 120
+      runas: root
