@@ -11,9 +11,9 @@ phases:
     commands:
       - echo Building the Docker image...
       - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/hello-docker:${DOCKER_TAG} .
-      - docker tag hello-docker:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/hello-docker:${DOCKER_TAG}
+      - docker tag $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/hello-docker:${DOCKER_TAG} hello-docker:latest
   post_build:
     commands:
       - echo Pushing the Docker image...
-      - docker push hello-docker:latest
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/hello-docker:${DOCKER_TAG}
       - echo Build completed on `date`
