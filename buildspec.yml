@@ -3,10 +3,12 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo Build started on `date`
+      - TIMESTAMP=`date +'%Y%m%d-%H%M%S%z'`
+      - echo Build started on ${TIMESTAMP}
       - echo Logging in to Amazon ECR...
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
-      - DOCKER_TAG=`git rev-parse HEAD`
+      - GIT_HASH=`git rev-parse HEAD`
+      - DOCKER_TAG="${GIT_HASH}-${TIMESTAMP}"
   build:
     commands:
       - echo Building the Docker image...
@@ -17,4 +19,4 @@ phases:
       - echo Pushing the Docker image...
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/hello-docker:${DOCKER_TAG}
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/hello-docker:latest
-      - echo Build completed on `date`
+      - echo Build completed on `date +'%Y%m%d-%H%M%S%z'`
