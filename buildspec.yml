@@ -11,7 +11,7 @@ phases:
       - DOCKER_TAG="${GIT_HASH}-${TIMESTAMP}"
   build:
     commands:
-      - echo Building the Docker image...
+      - echo Building $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/hello-docker:${DOCKER_TAG}
       - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/hello-docker:${DOCKER_TAG} .
   post_build:
     commands:
